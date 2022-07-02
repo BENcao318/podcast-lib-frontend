@@ -1,24 +1,59 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin, userLogout } from './redux/user'
 import './App.css';
 
+import SideBar from './containers/SideBar';
+import Main from './containers/Main';
+import AudioPlayer from './containers/AudioPlayer';
+import axios from 'axios';
+import SearchBar from './containers/SearchBar';
+import { useCallback } from 'react';
+import usePlayerApplications from './hooks/usePlayerApplications';
+
+const serverURL = 'http://localhost:3000/api/v1'
+
 function App() {
+  const { audioRef, handlePlay, handlePause } = usePlayerApplications()
+  const episodePlayer = useSelector((state) => state.episodePlayer)
+  const dispatch = useDispatch()
+
+  const userLoginStatus = useCallback(() => {
+    axios.get(`${serverURL}/logged_in`, { withCredentials: true })
+      .then((response) => {
+        if (response.data.logged_in) {
+          dispatch(userLogin(response.data.user))
+        } else {
+          dispatch(userLogout())
+        }
+      })
+      .catch((error) => console.log('error:', error))
+  }, [dispatch])
+
+  useEffect(() => {
+    userLoginStatus()
+  }, [userLoginStatus])
+
+  useEffect(() => {
+    document.title = 'Podcast Library'
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <SideBar />
+        <div className='grid justify-items-center'>
+          <Main handlePause={handlePause} handlePlay={handlePlay} />
+          {
+            Object.keys(episodePlayer.episode).length !== 0
+            &&
+            <AudioPlayer handlePause={handlePause} handlePlay={handlePlay} audioRef={audioRef} />
+          }
+          <SearchBar />
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
 
