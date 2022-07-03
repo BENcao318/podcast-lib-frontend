@@ -65,6 +65,7 @@ function PodcastDetails({ podcastDetails }) {
     if (userStatus.logged_in) {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, { withCredentials: true })
         .then((response) => {
+          console.log(response.data)
           if (response.data) dispatch(getSubscriptions(response.data));
         })
         .catch((error) => {

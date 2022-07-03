@@ -12,15 +12,13 @@ import SearchBar from './containers/SearchBar';
 import { useCallback } from 'react';
 import usePlayerApplications from './hooks/usePlayerApplications';
 
-const serverURL = 'http://localhost:3000/api/v1'
-
 function App() {
   const { audioRef, handlePlay, handlePause } = usePlayerApplications()
   const episodePlayer = useSelector((state) => state.episodePlayer)
   const dispatch = useDispatch()
 
   const userLoginStatus = useCallback(() => {
-    axios.get(`${serverURL}/logged_in`, { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/logged_in`, { withCredentials: true })
       .then((response) => {
         if (response.data.logged_in) {
           dispatch(userLogin(response.data.user))
