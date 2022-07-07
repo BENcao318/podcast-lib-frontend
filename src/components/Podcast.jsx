@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-function Podcast({ podcast }) {
+const Podcast = ({ podcast }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {

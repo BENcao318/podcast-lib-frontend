@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { episodePlaying, episodePause, episodeLoading, setPlayingEpisode } from '../redux/episodePlayer'
 
-function usePlayerApplications() {
+const usePlayerApplications = () => {
   const audioRef = useRef()
   const dispatch = useDispatch()
   const episodePlayer = useSelector((state) => state.episodePlayer)

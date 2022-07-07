@@ -1,4 +1,4 @@
-import axios from 'axios';
+import serverAPI from '../hooks/useAxios'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { timeSince } from '../helpers/helpers'
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import link from '../assets/link.svg'
 import checkedLogo from '../assets/checkedLogo.svg'
 import GenreBox from './GenreBox';
 
-function PodcastDetails({ podcastDetails }) {
+const PodcastDetails = ({ podcastDetails }) => {
   const [releaseDate, setReleaseDate] = useState('')
   const [isReadMore, setIsReadMore] = useState(false)
   const [warning, setWarning] = useState(false)
@@ -39,10 +39,10 @@ function PodcastDetails({ podcastDetails }) {
         genres: podcastDetails.genres,
         track_id: podcastDetails.trackId
       }
-      dispatch(addSubscription(podcast_to_subscribe))
-      axios.post(`${process.env.REACT_APP_SERVER_URL}/subscribe`, { podcast_to_subscribe }, { withCredentials: true })
+
+      serverAPI.post(`/subscribe`, { podcast_to_subscribe })
         .then((response) => {
-          console.log(response.data);
+          dispatch(addSubscription(podcast_to_subscribe))
         })
     } else {
       setWarning(true)
@@ -54,18 +54,17 @@ function PodcastDetails({ podcastDetails }) {
 
   const unSubscribe = useCallback(() => {
     const podcast_to_unsubscribe = podcastDetails.collectionName
-    dispatch(removeSubscription(podcastDetails.collectionName))
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/unsubscribe`, { podcast_to_unsubscribe }, { withCredentials: true })
+
+    serverAPI.post(`/unsubscribe`, { podcast_to_unsubscribe })
       .then((response) => {
-        console.log(response.data);
+        dispatch(removeSubscription(podcastDetails.collectionName))
       })
   }, [podcastDetails, dispatch])
 
   useEffect(() => {
     if (userStatus.logged_in) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, { withCredentials: true })
+      serverAPI.get(`/subscriptions`)
         .then((response) => {
-          console.log(response.data)
           if (response.data) dispatch(getSubscriptions(response.data));
         })
         .catch((error) => {

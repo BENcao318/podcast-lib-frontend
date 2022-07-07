@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { genres } from '../utils/consts'
 
-export default function GenresPopover() {
+const GenresPopover = () => {
   const navigate = useNavigate()
 
   const handleClick = (genreId, genreName) => {
@@ -65,3 +65,5 @@ export default function GenresPopover() {
     </div>
   )
 }
+
+export default GenresPopover

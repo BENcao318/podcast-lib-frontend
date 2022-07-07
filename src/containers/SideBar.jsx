@@ -1,4 +1,4 @@
-import axios from 'axios'
+import serverAPI from '../hooks/useAxios'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -9,24 +9,31 @@ import { ReactComponent as ListLogo } from '../assets/list.svg'
 import { ReactComponent as QueuesLogo } from '../assets/queues.svg'
 import { ReactComponent as GridLogo } from '../assets/grid.svg'
 import { ReactComponent as PodcastLogo } from '../assets/noun-podcast-26.svg'
+import { ReactComponent as SigninLogo } from '../assets/signin.svg'
+import { ReactComponent as UserLogo } from '../assets/user.svg'
 import GenresPopover from '../components/GenresPopover'
+import AskToSignInModal from '../components/AskToSignInModal'
+import { useState } from 'react'
+import SignOutPopover from '../components/SignOutPopover'
 
-function SideBar() {
+const SideBar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [showModal, setShowModal] = useState(false)
 
   const userStatus = useSelector((state) => state.user)
 
   function logout() {
-    dispatch(userLogout())
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/logout`, { withCredentials: true })
+    serverAPI.delete(`/logout`)
       .then((response) => {
         if (response.data.logged_out) {
-          console.log(response.data);
+          dispatch(userLogout())
+          navigate('/')
+          console.log(response.data)
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       })
   }
 
@@ -42,11 +49,27 @@ function SideBar() {
           <HomeLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
           <span className='ml-4 group-hover:text-sky-600'>Home</span>
         </li>
-        <li className='group min-w-full py-3 flex items-center cursor-pointer ml-7' onClick={() => navigate('/subscriptions')}>
+        <li
+          className='group min-w-full py-3 flex items-center cursor-pointer ml-7'
+          onClick={() => {
+            userStatus.logged_in ?
+              navigate('/subscriptions')
+              :
+              setShowModal(true)
+          }}
+        >
           <ListLogo className='w-5 h-5 inline-block group-hover:fill-sky-600' />
           <span className='ml-4 group-hover:text-sky-600'>Subscriptions</span>
         </li>
-        <li className='group min-w-full py-3 flex items-center cursor-pointer ml-6' onClick={() => navigate('/queues')}>
+        <li
+          className='group min-w-full py-3 flex items-center cursor-pointer ml-6'
+          onClick={() => {
+            userStatus.logged_in ?
+              navigate('/queues')
+              :
+              setShowModal(true)
+          }}
+        >
           <QueuesLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
           <span className='ml-3 group-hover:text-sky-600'>Queues</span>
         </li>
@@ -57,29 +80,39 @@ function SideBar() {
       </ul>
       <hr className='mt-6 mb-6 border-b-0 border-gray-400' />
 
-      <div className='absolute bottom-36 grid w-full'>
+      <div className='absolute bottom-36 w-full flex flex-col'>
+        <hr className='mb-2 border-b-0 border-gray-400' />
         {userStatus.logged_in ?
-          <div className='text-center grid'>
-            <hr className='mb-2 border-b-0 border-gray-400' />
-            <div className='font-semibold text-lg mb-2'>
-              Hi, {userStatus.user.username}
+          <div className='relative min-w-full py-3 h-16 flex items-center justify-start'>
+            <div className='absolute inset-x-12 group py-3 h-16 flex items-center justify-self-center cursor-pointer' >
+              <div className='relative'>
+                <UserLogo className='w-8 h-8 inline-block group-hover:fill-sky-600' />
+                <span className='h-3 w-3'>
+                  <span className="absolute animate-ping -top-2 -right-2 h-3 w-3 bg-sky-400 rounded-full opacity-75"></span>
+                  <span className="absolute -top-2 -right-2 h-3 w-3 bg-sky-500 rounded-full"></span>
+                </span>
+              </div>
+              <span className='ml-4 font-semibold text-lg text-neutral-600 group-hover:text-sky-600'>Your profile</span>
             </div>
-            <div className='bg-sky-600 w-1/2 self-center px-8 py-2 rounded-lg justify-self-center text-slate-200 font-semibold text-xl cursor-pointer hover:bg-sky-800' onClick={() => {
-              navigate('/')
-              logout()
-            }}>
-              Logout
-            </div>
-            <hr className='mt-2 border-b-0 border-gray-400' />
+            <SignOutPopover logout={logout} />
           </div>
           :
-          <div className='bg-sky-600 w-1/2 px-6 py-2 rounded-lg justify-self-center text-slate-200 font-semibold text-xl cursor-pointer hover:bg-sky-800' onClick={() => navigate('/login')}>
-            Log in
+          <div className='group min-w-full py-3 h-16 flex items-center justify-center cursor-pointer' onClick={() => navigate('/login')}>
+            <SigninLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
+            <span className='ml-4 font-semibold text-lg text-neutral-600  group-hover:text-sky-600'>Sign in</span>
           </div>
         }
+        <hr className='mt-2 border-b-0 border-gray-400' />
       </div>
+      {
+        showModal ?
+          <AskToSignInModal setShowModal={setShowModal} />
+          :
+          null
+      }
     </aside>
   )
 }
+
 
 export default SideBar

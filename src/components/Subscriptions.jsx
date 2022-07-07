@@ -1,7 +1,7 @@
 import React from 'react'
 import Subscription from './Subscription'
 
-function Subscriptions({ subscriptions }) {
+const Subscriptions = ({ subscriptions }) => {
   return (
     <div className='flex flex-wrap justify-center'>
       {subscriptions.map(subscription => (

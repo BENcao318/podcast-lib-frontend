@@ -1,32 +1,35 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import loadingB from '../assets/loadingB.svg'
+import useSWR from 'swr'
 
+import serverAPI from '../hooks/useAxios'
 import Podcasts from '../components/Podcasts'
 
-function HomeSection() {
-  const [podcasts, setPodcasts] = useState([])
+import loadingB from '../assets/loadingB.svg'
+import { useEffect } from 'react'
+import { useState } from 'react'
+
+
+const fetcher = (url) => {
+  return serverAPI(url).then((response) => response.data.results)
+}
+
+const HomeSection = () => {
+  const [loading, setLoading] = useState(false)
+  const { data } = useSWR('/podcasts', fetcher)
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/podcasts`)
-      .then((response) => {
-        setPodcasts([...response.data.results])
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, []);
+    data ? setLoading(false) : setLoading(true)
+  }, [data])
 
   return (
-    <section className='justify-self-center gap-12 w-8/12'>
-      <h1 className='font-bold text-3xl mb-12 mt-6'>Top Podcasts</h1>
-      {podcasts.length === 0 ?
-        <div className='font-bold text-lg mt-28'>
+    <section className='w-8/12 gap-12 justify-self-center'>
+      <h1 className='mt-6 mb-12 text-3xl font-bold'>Top Podcasts</h1>
+      {loading ?
+        <div className='text-lg font-bold mt-28'>
           <img src={loadingB} alt="loading animation" className='mx-auto mt-64' />
           Please allow 15 ~ 20 secconds for Heroku server to start up. If no contents showing after 20 seconds, refresh the page to load them up.
         </div>
         :
-        <Podcasts podcasts={podcasts} />
+        <Podcasts podcasts={data} />
       }
       <div className='h-36'></div>
     </section>

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import serverAPI from '../hooks/useAxios'
 import React from 'react'
 
 import { useState, useEffect } from 'react'
@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom'
 
 import Podcasts from '../components/Podcasts'
 
-function GenresSection() {
+const GenresSection = () => {
   const [podcasts, setPodcasts] = useState([])
   const { name, id } = useParams()
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/genres/${id}`)
+    serverAPI.get(`/genres/${id}`)
       .then((response) => {
         if (response.data.success) {
           const topPodcasts = JSON.parse(response.data.podcasts).results

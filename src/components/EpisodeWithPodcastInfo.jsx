@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import Episode from './Episode';
 
-function EpisodeWithPodcastInfo({ episode, handlePlay, handlePause }) {
+const EpisodeWithPodcastInfo = ({ episode, handlePlay, handlePause }) => {
 
   const navigate = useNavigate()
 

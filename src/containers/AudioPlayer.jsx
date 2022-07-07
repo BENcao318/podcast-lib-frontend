@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
-import axios from 'axios'
+import serverAPI from '../hooks/useAxios'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { removeQueue } from '../redux/queue'
@@ -12,16 +12,14 @@ import { ReactComponent as PlayButton } from '../assets/play-button.svg'
 import { ReactComponent as PauseButton } from '../assets/pause-button.svg'
 import { ReactComponent as SoundImg } from '../assets/sound.svg'
 
-function AudioPlayer({ handlePause, handlePlay, audioRef }) {
+const AudioPlayer = ({ handlePause, handlePlay, audioRef }) => {
   const episodePlayer = useSelector((state) => state.episodePlayer)
   const queues = useSelector((state) => state.queue.queues)
-
-  console.log(`123 ${process.env.REACT_APP_SERVER_URL}`);
 
   const [forwardEffect, setForwardEffect] = useState(false)   // For fastforward animation
   const [backwardEffect, setBackwardEffect] = useState(false) // For backward animation
   const [volume, setVolume] = useState(0.8)
-  const [audioProgress, setAudioProgress] = useState('123')
+  const [audioProgress, setAudioProgress] = useState(0)
 
   const dispatch = useDispatch()
 
@@ -57,7 +55,7 @@ function AudioPlayer({ handlePause, handlePlay, audioRef }) {
       track_id: episodePlayer.episode.trackId,
       episode_name: episodePlayer.episode.trackName
     }
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/unqueue`, { episode_to_unqueue }, { withCredentials: true })
+    serverAPI.post(`/unqueue`, { episode_to_unqueue })
       .then((response) => {
         dispatch(removeQueue(episodePlayer.episode.trackId))
       })
@@ -84,6 +82,13 @@ function AudioPlayer({ handlePause, handlePlay, audioRef }) {
       handlePlay(convertEpisodeDataNaming(queues[0]))
     }
   }, [audioProgress, audioRef, handlePlay, unQueue, queues])
+
+  useEffect(() => {
+    console.log('cleaning');
+    return () => {
+      clearInterval(intervalRef.current)
+    }
+  }, [intervalRef])
 
   return (
     <section className='fixed left-0 bottom-0 min-w-full z-20 h-28 bg-neutral-100 grid grid-cols-3 place-items-center shadow-inner shadow-sky-200'>

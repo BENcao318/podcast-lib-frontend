@@ -1,10 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 
-function Subscription({ subscription }) {
+const Subscription = ({ subscription }) => {
   const navigate = useNavigate()
 
-  function handleClick() {
+  const handleClick = () => {
     navigate(`/podcasts/${subscription.track_id}`)
   }
 
