@@ -38,19 +38,19 @@ const SideBar = () => {
   }
 
   return (
-    <aside className='lg:w-60 fixed min-h-screen flex-col z-20 bg-white'>
-      <div className='flex items-center cursor-pointer mt-4' onClick={() => navigate('/')}>
-        <PodcastLogo className='w-16 h-16 fill-sky-600 ml-4' />
-        <span className='font-semibold text-2xl text-neutral-600 ml-4'> Podcast Library</span>
+    <aside className='fixed z-20 flex-col min-h-screen bg-white lg:w-60'>
+      <div className='flex items-center mt-4 cursor-pointer' onClick={() => navigate('/')}>
+        <PodcastLogo className='w-16 h-16 ml-4 fill-sky-600' />
+        <span className='ml-4 text-2xl font-semibold text-neutral-600'> Podcast Library</span>
       </div>
       <hr className='mt-4 mb-6 border-b-0 border-gray-400' />
-      <ul className='w-full font-semibold text-lg text-neutral-600 grid grid-rows-4 place-items-center ml-4'>
-        <li className='group min-w-full py-3 flex items-center cursor-pointer ml-6' onClick={() => navigate('/')}>
-          <HomeLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
+      <ul className='grid w-full grid-rows-4 ml-4 text-lg font-semibold text-neutral-600 place-items-center'>
+        <li className='flex items-center min-w-full py-3 ml-6 cursor-pointer group' onClick={() => navigate('/')}>
+          <HomeLogo className='inline-block w-6 h-6 group-hover:fill-sky-600' />
           <span className='ml-4 group-hover:text-sky-600'>Home</span>
         </li>
         <li
-          className='group min-w-full py-3 flex items-center cursor-pointer ml-7'
+          className='flex items-center min-w-full py-3 cursor-pointer group ml-7'
           onClick={() => {
             userStatus.logged_in ?
               navigate('/subscriptions')
@@ -58,11 +58,11 @@ const SideBar = () => {
               setShowModal(true)
           }}
         >
-          <ListLogo className='w-5 h-5 inline-block group-hover:fill-sky-600' />
+          <ListLogo className='inline-block w-5 h-5 group-hover:fill-sky-600' />
           <span className='ml-4 group-hover:text-sky-600'>Subscriptions</span>
         </li>
         <li
-          className='group min-w-full py-3 flex items-center cursor-pointer ml-6'
+          className='flex items-center min-w-full py-3 ml-6 cursor-pointer group'
           onClick={() => {
             userStatus.logged_in ?
               navigate('/queues')
@@ -70,36 +70,36 @@ const SideBar = () => {
               setShowModal(true)
           }}
         >
-          <QueuesLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
+          <QueuesLogo className='inline-block w-6 h-6 group-hover:fill-sky-600' />
           <span className='ml-3 group-hover:text-sky-600'>Queues</span>
         </li>
-        <li className='group min-w-full py-3 flex items-center cursor-pointer ml-6'>
-          <GridLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
+        <li className='flex items-center min-w-full py-3 ml-6 cursor-pointer group'>
+          <GridLogo className='inline-block w-6 h-6 group-hover:fill-sky-600' />
           <GenresPopover className='group-hover:text-sky-600' />
         </li>
       </ul>
       <hr className='mt-6 mb-6 border-b-0 border-gray-400' />
 
-      <div className='absolute bottom-36 w-full flex flex-col'>
+      <div className='absolute flex flex-col w-full bottom-36'>
         <hr className='mb-2 border-b-0 border-gray-400' />
         {userStatus.logged_in ?
-          <div className='relative min-w-full py-3 h-16 flex items-center justify-start'>
-            <div className='absolute inset-x-12 group py-3 h-16 flex items-center justify-self-center cursor-pointer' >
+          <div className='relative flex items-center justify-start h-16 min-w-full py-3'>
+            <div className='absolute flex items-center h-16 py-3 cursor-pointer inset-x-12 group justify-self-center' >
               <div className='relative'>
-                <UserLogo className='w-8 h-8 inline-block group-hover:fill-sky-600' />
-                <span className='h-3 w-3'>
-                  <span className="absolute animate-ping -top-2 -right-2 h-3 w-3 bg-sky-400 rounded-full opacity-75"></span>
-                  <span className="absolute -top-2 -right-2 h-3 w-3 bg-sky-500 rounded-full"></span>
-                </span>
+                <UserLogo className='inline-block w-8 h-8 group-hover:fill-sky-600' />
+                {/* <span className='w-3 h-3'>
+                  <span className="absolute w-3 h-3 rounded-full opacity-75 animate-ping -top-2 -right-2 bg-sky-400"></span>
+                  <span className="absolute w-3 h-3 rounded-full -top-2 -right-2 bg-sky-500"></span>
+                </span> */}
               </div>
-              <span className='ml-4 font-semibold text-lg text-neutral-600 group-hover:text-sky-600'>Your profile</span>
+              <span className='ml-4 text-lg font-semibold text-neutral-600 group-hover:text-sky-600'>Your profile</span>
             </div>
             <SignOutPopover logout={logout} />
           </div>
           :
-          <div className='group min-w-full py-3 h-16 flex items-center justify-center cursor-pointer' onClick={() => navigate('/login')}>
-            <SigninLogo className='w-6 h-6 inline-block group-hover:fill-sky-600' />
-            <span className='ml-4 font-semibold text-lg text-neutral-600  group-hover:text-sky-600'>Sign in</span>
+          <div className='flex items-center justify-center h-16 min-w-full py-3 cursor-pointer group' onClick={() => navigate('/login')}>
+            <SigninLogo className='inline-block w-6 h-6 group-hover:fill-sky-600' />
+            <span className='ml-4 text-lg font-semibold text-neutral-600 group-hover:text-sky-600'>Sign in</span>
           </div>
         }
         <hr className='mt-2 border-b-0 border-gray-400' />

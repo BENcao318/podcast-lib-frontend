@@ -15,6 +15,9 @@ import SearchBar from './containers/SearchBar'
 import { useCallback } from 'react'
 import usePlayerApplications from './hooks/usePlayerApplications'
 
+// import axios from 'axios'
+// axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL ? process.env.REACT_APP_SERVER_URL : 'http://localhost:3001'
+
 const App = () => {
   const { audioRef, handlePlay, handlePause } = usePlayerApplications()
   const episodePlayer = useSelector((state) => state.episodePlayer)
