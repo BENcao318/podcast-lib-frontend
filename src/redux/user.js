@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   logged_in: false,
-  user: {}
+  user: {},
 }
 
 export const userSlice = createSlice({
@@ -21,7 +21,7 @@ export const userSlice = createSlice({
       state.logged_in = false
       state.user = {}
     },
-  }
+  },
 })
 
 export const { userLogin, userLogout } = userSlice.actions

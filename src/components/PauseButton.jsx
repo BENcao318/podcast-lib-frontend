@@ -3,9 +3,17 @@ import audioPlayingButton from '../assets/icons8-audio-wave.gif'
 
 const PauseButton = ({ handlePause }) => {
   return (
-    <div className='border-2 rounded-xl px-2 py-1 flex gap-2 items-center hover:border-sky-600 cursor-pointer' onClick={() => handlePause()}>
-      <img src={audioPlayingButton} alt="pausebutton" className='w-7 inline-block' onClick={handlePause} />
-      <span className='font-medium text-base text-sky-600'>PLAYING</span>
+    <div
+      className="flex items-center gap-2 px-2 py-1 border-2 cursor-pointer rounded-xl hover:border-sky-600"
+      onClick={() => handlePause()}
+    >
+      <img
+        src={audioPlayingButton}
+        alt="pausebutton"
+        className="inline-block w-7"
+        onClick={handlePause}
+      />
+      <span className="text-base font-medium text-sky-600">PLAYING</span>
     </div>
   )
 }

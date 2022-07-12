@@ -10,23 +10,22 @@ const SubscriptionSection = () => {
   const subscriptions = useSelector((state) => state.subscription.subscriptions)
 
   useEffect(() => {
-    serverAPI.get(`/subscriptions`)
+    serverAPI
+      .get(`/subscriptions`)
       .then((response) => {
-        if (response.data) dispatch(getSubscriptions(response.data));
+        if (response.data) dispatch(getSubscriptions(response.data))
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       })
   }, [dispatch])
 
   return (
-    <section className='justify-self-center gap-12 w-8/12'>
-      <div className='font-bold text-3xl mt-8 mb-12'>
-        Your Subscriptions:
-      </div >
+    <section className="w-8/12 gap-12 justify-self-center">
+      <div className="mt-8 mb-12 text-3xl font-bold">Your Subscriptions:</div>
       <Subscriptions subscriptions={subscriptions} />
-      <div className='h-36'></div>
-    </section >
+      <div className="h-36"></div>
+    </section>
   )
 }
 

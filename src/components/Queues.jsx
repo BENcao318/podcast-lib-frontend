@@ -13,28 +13,32 @@ const Queues = ({ queues, handlePlay, handlePause }) => {
 
   useEffect(() => {
     if (userStatus.logged_in) {
-      serverAPI.get(`/queues`)
+      serverAPI
+        .get(`/queues`)
         .then((response) => {
-          if (response.data) dispatch(getQueues(response.data));
+          if (response.data) dispatch(getQueues(response.data))
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
         })
     }
   }, [dispatch, userStatus.logged_in])
 
   return (
     <div>
-      <div className='flex flex-wrap justify-center'>
-        {queues.map(queue => {
+      <div className="flex flex-wrap justify-center">
+        {queues.map((queue) => {
           const episode = convertEpisodeDataNaming(queue)
           return (
             <div key={queue.track_id}>
-              <EpisodeWithPodcastInfo episode={episode} handlePlay={handlePlay} handlePause={handlePause} />
+              <EpisodeWithPodcastInfo
+                episode={episode}
+                handlePlay={handlePlay}
+                handlePause={handlePause}
+              />
             </div>
           )
-        }
-        )}
+        })}
       </div>
     </div>
   )

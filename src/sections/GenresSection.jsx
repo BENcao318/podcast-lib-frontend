@@ -11,27 +11,28 @@ const GenresSection = () => {
   const { name, id } = useParams()
 
   useEffect(() => {
-    serverAPI.get(`/genres/${id}`)
+    serverAPI
+      .get(`/genres/${id}`)
       .then((response) => {
         if (response.data.success) {
           const topPodcasts = JSON.parse(response.data.podcasts).results
-          setPodcasts(topPodcasts);
+          setPodcasts(topPodcasts)
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       })
   }, [id])
 
   return (
-    <section className='justify-self-center gap-12 w-8/12'>
-      <h1 className='font-bold text-3xl mb-12 mt-6'>
+    <section className="w-8/12 gap-12 justify-self-center">
+      <h1 className="mt-6 mb-12 text-3xl font-bold">
         Top
-        <span className='text-sky-600'> {name} </span>
+        <span className="text-sky-600"> {name} </span>
         podcasts
       </h1>
       <Podcasts podcasts={podcasts} />
-      <div className='h-36'></div>
+      <div className="h-36"></div>
     </section>
   )
 }

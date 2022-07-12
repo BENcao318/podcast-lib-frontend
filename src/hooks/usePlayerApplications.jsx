@@ -1,7 +1,12 @@
 import { useRef } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
-import { episodePlaying, episodePause, episodeLoading, setPlayingEpisode } from '../redux/episodePlayer'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  episodePlaying,
+  episodePause,
+  episodeLoading,
+  setPlayingEpisode,
+} from '../redux/episodePlayer'
 
 const usePlayerApplications = () => {
   const audioRef = useRef()
@@ -16,7 +21,7 @@ const usePlayerApplications = () => {
       dispatch(setPlayingEpisode(episode))
       dispatch(episodePlaying())
     } else if (episodePlayer.episode.episodeUrl !== episode.episodeUrl) {
-      audioRef.current.pause()    //pause current playing audio and create a new audio instance
+      audioRef.current.pause() //pause current playing audio and create a new audio instance
       audioRef.current = new Audio(episode.episodeUrl)
       audioRef.current.play()
       dispatch(episodePlaying())
@@ -36,7 +41,7 @@ const usePlayerApplications = () => {
   return {
     audioRef,
     handlePlay,
-    handlePause
+    handlePause,
   }
 }
 

@@ -16,20 +16,20 @@ const SignInSection = () => {
   const dispatch = useDispatch()
   const [signInErrors, setSignInErrors] = useState('')
 
-  const handleSubmit = useCallback((formInfo) => {
-    const user = {
-      email: formInfo.email,
-      password: formInfo.password
-    }
+  const handleSubmit = useCallback(
+    (formInfo) => {
+      const user = {
+        email: formInfo.email,
+        password: formInfo.password,
+      }
 
-    serverAPI.post(`/login`, { user })
-      .then((response) => {
+      serverAPI.post(`/login`, { user }).then((response) => {
         if (response.data.logged_in) {
           dispatch(userLogin(response.data.user))
           setSignInErrors('')
           navigate('/')
           toast.success(`Welcome! ${response.data.user.username}`, {
-            position: "top-right",
+            position: 'top-right',
             autoClose: 4000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -40,7 +40,9 @@ const SignInSection = () => {
           setSignInErrors(response.data.errors)
         }
       })
-  }, [dispatch, navigate])
+    },
+    [dispatch, navigate]
+  )
 
   return (
     <section className="absolute w-full h-full">

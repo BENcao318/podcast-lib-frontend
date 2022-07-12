@@ -7,17 +7,19 @@ const GenreBox = ({ podcastGenres }) => {
   const navigate = useNavigate()
 
   return (
-    <div className='flex gap-2 mx-2 items-center'>
-      {
-        genres.map((genre) => (
-          <div key={genre.id} className={`${genreBackgroundColor(genre.name)} text-semibold text-white rounded-xl p-1 w-24 cursor-pointer`} onClick={() => navigate(`/genres/${genre.name}/${genre.id}`)}>
-            {genre.name}
-          </div>
-        )
-        )
-      }
+    <div className="flex items-center gap-2 mx-2">
+      {genres.map((genre) => (
+        <div
+          key={genre.id}
+          className={`${genreBackgroundColor(
+            genre.name
+          )} text-semibold text-white rounded-xl p-1 w-24 cursor-pointer`}
+          onClick={() => navigate(`/genres/${genre.name}/${genre.id}`)}
+        >
+          {genre.name}
+        </div>
+      ))}
     </div>
-
   )
 }
 

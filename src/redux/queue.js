@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  queues: []
+  queues: [],
 }
 
 export const queueSlice = createSlice({
@@ -16,12 +16,14 @@ export const queueSlice = createSlice({
       state.queues.push(action.payload)
     },
     removeQueue: (state, action) => {
-      state.queues = state.queues.filter((queue) => queue.track_id !== action.payload)
+      state.queues = state.queues.filter(
+        (queue) => queue.track_id !== action.payload
+      )
     },
     getQueues: (state, action) => {
       state.queues = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { addQueue, removeQueue, getQueues } = queueSlice.actions

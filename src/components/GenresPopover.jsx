@@ -13,7 +13,7 @@ const GenresPopover = () => {
   }
 
   return (
-    <div className="top-16 w-full max-w-sm px-4">
+    <div className="w-full max-w-sm px-2 ml-2 top-16">
       <Popover className="relative">
         {({ open, close }) => (
           <>
@@ -24,7 +24,9 @@ const GenresPopover = () => {
             >
               <span>Browse By Genres</span>
               <ChevronRightIcon
-                className={`${open ? 'visible' : 'rotate-90 transform invisible'}
+                className={`${
+                  open ? 'visible' : 'rotate-90 transform invisible'
+                }
                    ml-2 h-5 w-5 text-sky-600 inline-flex self-center transition duration-150 ease-in-out group-hover:text-opacity-80 group-hover:visible`}
                 aria-hidden="true"
               />
@@ -38,19 +40,19 @@ const GenresPopover = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-10 mt-3 w-max max-w-sm translate-x-48 -translate-y-14 transform sm:px-0 lg:max-w-3xl">
+              <Popover.Panel className="absolute z-10 max-w-sm mt-3 transform translate-x-48 w-max -translate-y-14 sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-lg shadow-xl ring-2 ring-black ring-opacity-5">
-                  <div className="relative grid gap-6 bg-white p-6 lg:grid-cols-2">
+                  <div className="relative grid gap-6 p-6 bg-white lg:grid-cols-2">
                     {genres.map((item) => (
                       <div
                         key={item.name}
-                        className="-m-2 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-sky-400 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                        className="p-2 -m-2 transition duration-150 ease-in-out rounded-lg hover:bg-sky-400 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         onClick={() => {
                           close()
                           handleClick(item.id, item.name)
                         }}
                       >
-                        <p className="text-lg font-medium text-gray-900 text-center">
+                        <p className="text-lg font-medium text-center text-gray-900">
                           {item.name}
                         </p>
                       </div>

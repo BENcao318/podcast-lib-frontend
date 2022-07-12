@@ -23,12 +23,13 @@ const App = () => {
   const episodePlayer = useSelector((state) => state.episodePlayer)
   const [searchResult, setSearchResult] = useState({
     podcasts: [],
-    episodes: []
+    episodes: [],
   })
   const dispatch = useDispatch()
 
   const userLoginStatus = useCallback(() => {
-    serverAPI.get(`/logged_in`)
+    serverAPI
+      .get(`/logged_in`)
       .then((response) => {
         if (response.data.logged_in) {
           dispatch(userLogin(response.data.user))
@@ -51,16 +52,24 @@ const App = () => {
     <>
       <BrowserRouter>
         <SideBar />
-        <div className='grid justify-items-center'>
-          <Main handlePause={handlePause} handlePlay={handlePlay} searchResult={searchResult} />
-          {
-            Object.keys(episodePlayer.episode).length !== 0
-            &&
-            <AudioPlayer handlePause={handlePause} handlePlay={handlePlay} audioRef={audioRef} />
-          }
-          <SearchBar searchResult={searchResult} setSearchResult={setSearchResult} />
+        <div className="grid justify-items-center">
+          <Main
+            handlePause={handlePause}
+            handlePlay={handlePlay}
+            searchResult={searchResult}
+          />
+          {Object.keys(episodePlayer.episode).length !== 0 && (
+            <AudioPlayer
+              handlePause={handlePause}
+              handlePlay={handlePlay}
+              audioRef={audioRef}
+            />
+          )}
+          <SearchBar
+            searchResult={searchResult}
+            setSearchResult={setSearchResult}
+          />
         </div>
-
       </BrowserRouter>
       <ToastContainer
         newestOnTop={false}
@@ -69,7 +78,7 @@ const App = () => {
         pauseOnFocusLoss
       />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

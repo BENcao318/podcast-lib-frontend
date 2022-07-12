@@ -24,5 +24,4 @@ const LoadingGridOtherPodcasts = ({ ...rest }) => {
   )
 }
 
-
 export default LoadingGridOtherPodcasts

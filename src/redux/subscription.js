@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  subscriptions: []
+  subscriptions: [],
 }
 
 export const subscriptionSlice = createSlice({
@@ -16,14 +16,17 @@ export const subscriptionSlice = createSlice({
       state.subscriptions.push(action.payload)
     },
     removeSubscription: (state, action) => {
-      state.subscriptions = state.subscriptions.filter((subscription) => subscription.name !== action.payload)
+      state.subscriptions = state.subscriptions.filter(
+        (subscription) => subscription.name !== action.payload
+      )
     },
     getSubscriptions: (state, action) => {
       state.subscriptions = action.payload
-    }
-  }
+    },
+  },
 })
 
-export const { addSubscription, removeSubscription, getSubscriptions } = subscriptionSlice.actions
+export const { addSubscription, removeSubscription, getSubscriptions } =
+  subscriptionSlice.actions
 
 export default subscriptionSlice.reducer

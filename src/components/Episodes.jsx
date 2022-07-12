@@ -12,25 +12,31 @@ const Episodes = ({ episodes, handlePause, handlePlay }) => {
 
   useEffect(() => {
     if (userStatus.logged_in) {
-      serverAPI.get(`/queues`)
+      serverAPI
+        .get(`/queues`)
         .then((response) => {
-          if (response.data) dispatch(getQueues(response.data));
+          if (response.data) dispatch(getQueues(response.data))
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
         })
     }
   }, [dispatch, userStatus.logged_in])
 
   return (
-    episodes &&
-    <div>
-      {episodes.map(episode => (
-        <div key={episode.trackId}>
-          <Episode episode={episode} handlePause={handlePause} handlePlay={handlePlay} />
-        </div>
-      ))}
-    </div>
+    episodes && (
+      <div>
+        {episodes.map((episode) => (
+          <div key={episode.trackId}>
+            <Episode
+              episode={episode}
+              handlePause={handlePause}
+              handlePlay={handlePlay}
+            />
+          </div>
+        ))}
+      </div>
+    )
   )
 }
 

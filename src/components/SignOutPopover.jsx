@@ -13,7 +13,7 @@ const SignOutPopover = ({ logout }) => {
               ${open ? '' : 'text-opacity-80'}
               group-hover:text-sky-600 inline-flex hover:text-opacity-100`}
             >
-              <MoreLogo className='w-6 h-6 p-1 rounded-full cursor-pointer fill-neutral-600 hover:bg-gray-200' />
+              <MoreLogo className="w-6 h-6 p-1 rounded-full cursor-pointer fill-neutral-600 hover:bg-gray-200" />
               {/* <MoreLogo className='absolute w-6 h-6 p-1 mt-1 rounded-full cursor-pointer inset-x-56 fill-neutral-600 hover:bg-gray-200' onClick={() => logout()} /> */}
             </Popover.Button>
             <Transition
@@ -29,9 +29,7 @@ const SignOutPopover = ({ logout }) => {
                 className="absolute z-10 px-4 py-1 mt-3 font-semibold transform -translate-x-8 -translate-y-3 rounded cursor-pointer w-max bg-neutral-200 lg:max-w-3xl hover:bg-neutral-400"
                 onClick={() => logout()}
               >
-                <div className="relative">
-                  Sign out
-                </div>
+                <div className="relative">Sign out</div>
               </Popover.Panel>
             </Transition>
           </>

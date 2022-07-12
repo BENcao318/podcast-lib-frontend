@@ -10,22 +10,25 @@ const QueuesSection = ({ handlePlay, handlePause }) => {
   const queues = useSelector((state) => state.queue.queues)
 
   useEffect(() => {
-    serverAPI.get(`/queues`)
+    serverAPI
+      .get(`/queues`)
       .then((response) => {
-        if (response.data) dispatch(getQueues(response.data));
+        if (response.data) dispatch(getQueues(response.data))
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       })
   }, [dispatch])
 
   return (
-    <section className='justify-self-center gap-12 w-8/12'>
-      <div className='font-bold text-3xl my-8'>
-        Your Queues:
-      </div>
-      <Queues queues={queues} handlePlay={handlePlay} handlePause={handlePause} />
-      <div className='h-36'></div>
+    <section className="w-8/12 gap-12 justify-self-center">
+      <div className="my-8 text-3xl font-bold">Your Queues:</div>
+      <Queues
+        queues={queues}
+        handlePlay={handlePlay}
+        handlePause={handlePause}
+      />
+      <div className="h-36"></div>
     </section>
   )
 }
