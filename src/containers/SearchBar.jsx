@@ -42,7 +42,7 @@ const SearchBar = ({ searchResult, setSearchResult }) => {
   )
 
   return (
-    <div className="fixed top-0 z-30 w-1/2 mt-2 place-self-center">
+    <div className="fixed top-0 w-1/2 mt-2 place-self-center">
       <form>
         <div className="flex content-center">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3">

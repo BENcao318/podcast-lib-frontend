@@ -38,7 +38,7 @@ const SideBar = ({ showSidebar, setShowModal }) => {
 
   return (
     <aside
-      className={`fixed z-20 flex flex-col min-h-screen bg-white w-64 transition ease-in-out duration-300 ${
+      className={`fixed z-60 flex flex-col min-h-screen bg-white w-72 transition ease-in-out duration-300 ${
         showSidebar
           ? 'translate-x-0'
           : '-translate-x-full xxl:translate-x-0 w-0'

@@ -91,14 +91,13 @@ const AudioPlayer = ({ handlePause, handlePlay, audioRef }) => {
   }, [audioProgress, audioRef, handlePlay, unQueue, queues])
 
   useEffect(() => {
-    console.log('cleaning')
     return () => {
       clearInterval(intervalRef.current)
     }
   }, [intervalRef])
 
   return (
-    <section className="fixed bottom-0 left-0 z-20 grid min-w-full grid-cols-3 shadow-inner h-28 bg-neutral-100 place-items-center shadow-sky-200">
+    <section className="fixed bottom-0 left-0 z-20 grid w-full min-w-full grid-cols-3 shadow-inner h-28 bg-neutral-100 place-items-center shadow-sky-200">
       <div className="flex justify-self-start">
         <img
           src={episodePlayer.episode.artworkUrl160}

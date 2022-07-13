@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin, userLogout } from './redux/user'
 import { ReactComponent as SidebarsLogo } from './assets/list-sidebar.svg'
-import { ReactComponent as FoldMenuLogo } from './assets/left-arrow.svg'
+import { ReactComponent as FoldMenuLogo } from './assets/x.svg'
 
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -55,15 +55,15 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <div className="sticky flex justify-between w-64 px-4 py-2 top-2">
+        <div className="sticky flex invisible px-4 py-2 bg-white w-72 top-2 xxl:h-0 z-60">
           <SidebarsLogo
-            className={`w-8 h-8 fill-neutral-600 hover:fill-neutral-400 xxl:invisible cursor-pointer ${
-              showSidebar ? 'invisible' : 'visible'
+            className={`w-8 h-8 ml-4 fill-neutral-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+              showSidebar ? 'invisible w-0 h-0' : 'visible'
             }`}
             onClick={() => setShowSidebar(!showSidebar)}
           />
           <FoldMenuLogo
-            className={`w-6 h-6 fill-neutrual-400 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+            className={`w-8 h-8 fill-neutrual-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
               showSidebar ? 'visible' : 'invisible'
             }`}
             onClick={() => setShowSidebar(!showSidebar)}
