@@ -102,9 +102,14 @@ const SideBar = ({ showSidebar, setShowModal }) => {
                   <span className="absolute w-3 h-3 rounded-full -top-2 -right-2 bg-sky-500"></span>
                 </span> */}
               </div>
-              <span className="ml-4 text-lg font-semibold text-neutral-600 group-hover:text-sky-600">
-                Hi, {userStatus.user.username}
-              </span>
+              <div>
+                <span className="ml-4 text-lg font-semibold text-neutral-600 group-hover:text-sky-600">
+                  Hi,
+                </span>
+                <span className="text-lg font-semibold text-neutral-600 group-hover:text-sky-600">
+                  {userStatus.user.username}
+                </span>
+              </div>
             </div>
             <SignOutPopover logout={logout} />
           </div>
