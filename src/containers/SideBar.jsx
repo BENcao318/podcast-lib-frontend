@@ -11,15 +11,13 @@ import { ReactComponent as GridLogo } from '../assets/grid.svg'
 import { ReactComponent as PodcastLogo } from '../assets/noun-podcast-26.svg'
 import { ReactComponent as SigninLogo } from '../assets/signin.svg'
 import { ReactComponent as UserLogo } from '../assets/user.svg'
+
 import GenresPopover from '../components/GenresPopover'
-import AskToSignInModal from '../components/AskToSignInModal'
-import { useState } from 'react'
 import SignOutPopover from '../components/SignOutPopover'
 
-const SideBar = () => {
+const SideBar = ({ showSidebar, setShowModal }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [showModal, setShowModal] = useState(false)
 
   const userStatus = useSelector((state) => state.user)
 
@@ -39,7 +37,13 @@ const SideBar = () => {
   }
 
   return (
-    <aside className="fixed z-20 flex flex-col min-h-screen bg-white lg:w-72 ">
+    <aside
+      className={`fixed z-20 flex flex-col min-h-screen bg-white w-64 transition ease-in-out duration-300 ${
+        showSidebar
+          ? 'translate-x-0'
+          : '-translate-x-full xxl:translate-x-0 w-0'
+      }`}
+    >
       <div
         className="flex items-center mt-4 cursor-pointer"
         onClick={() => navigate('/')}
@@ -99,7 +103,7 @@ const SideBar = () => {
                 </span> */}
               </div>
               <span className="ml-4 text-lg font-semibold text-neutral-600 group-hover:text-sky-600">
-                Your profile
+                Hi, {userStatus.user.username}
               </span>
             </div>
             <SignOutPopover logout={logout} />
@@ -117,7 +121,6 @@ const SideBar = () => {
         )}
         <hr className="mt-2 border-b-0 border-gray-400" />
       </div>
-      {showModal ? <AskToSignInModal setShowModal={setShowModal} /> : null}
     </aside>
   )
 }

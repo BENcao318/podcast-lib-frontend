@@ -4,11 +4,13 @@ import Subscription from './Subscription'
 const Subscriptions = ({ subscriptions }) => {
   return (
     <div className="flex flex-wrap justify-center">
-      {subscriptions.map((subscription) => (
-        <div key={subscription.track_id}>
-          <Subscription subscription={subscription} />
-        </div>
-      ))}
+      {subscriptions &&
+        subscriptions.map((subscription) => (
+          <Subscription
+            subscription={subscription}
+            key={subscription.track_id}
+          />
+        ))}
     </div>
   )
 }

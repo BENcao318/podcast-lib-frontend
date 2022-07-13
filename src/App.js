@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin, userLogout } from './redux/user'
+import { ReactComponent as SidebarsLogo } from './assets/list-sidebar.svg'
+import { ReactComponent as FoldMenuLogo } from './assets/left-arrow.svg'
 
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -12,7 +14,7 @@ import Main from './containers/Main'
 import AudioPlayer from './containers/AudioPlayer'
 import serverAPI from './hooks/useAxios'
 import SearchBar from './containers/SearchBar'
-import { useCallback } from 'react'
+import AskToSignInModal from './components/AskToSignInModal'
 import usePlayerApplications from './hooks/usePlayerApplications'
 
 // import axios from 'axios'
@@ -25,6 +27,8 @@ const App = () => {
     podcasts: [],
     episodes: [],
   })
+  const [showSidebar, setShowSidebar] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
 
   const userLoginStatus = useCallback(() => {
@@ -51,7 +55,21 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <SideBar />
+        <div className="sticky flex justify-between w-64 px-4 py-2 top-2">
+          <SidebarsLogo
+            className={`w-8 h-8 fill-neutral-600 hover:fill-neutral-400 xxl:invisible cursor-pointer ${
+              showSidebar ? 'invisible' : 'visible'
+            }`}
+            onClick={() => setShowSidebar(!showSidebar)}
+          />
+          <FoldMenuLogo
+            className={`w-6 h-6 fill-neutrual-400 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+              showSidebar ? 'visible' : 'invisible'
+            }`}
+            onClick={() => setShowSidebar(!showSidebar)}
+          />
+        </div>
+        <SideBar showSidebar={showSidebar} setShowModal={setShowModal} />
         <div className="grid justify-items-center">
           <Main
             handlePause={handlePause}
@@ -70,6 +88,7 @@ const App = () => {
             setSearchResult={setSearchResult}
           />
         </div>
+        {showModal ? <AskToSignInModal setShowModal={setShowModal} /> : null}
       </BrowserRouter>
       <ToastContainer
         newestOnTop={false}

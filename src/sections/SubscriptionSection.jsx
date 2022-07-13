@@ -21,8 +21,8 @@ const SubscriptionSection = () => {
   }, [dispatch])
 
   return (
-    <section className="w-8/12 gap-12 justify-self-center">
-      <div className="mt-8 mb-12 text-3xl font-bold">Your Subscriptions:</div>
+    <section className="w-full gap-12 lg:w-8/12 justify-self-center">
+      <div className="mt-6 mb-12 text-3xl font-bold">Your Subscriptions:</div>
       <Subscriptions subscriptions={subscriptions} />
       <div className="h-36"></div>
     </section>

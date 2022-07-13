@@ -29,6 +29,7 @@ module.exports = {
       poppins: ['Poppins', 'sans-serif'],
     },
     screens: {
+      xxl: { min: '1620px' },
       xl: { min: '1200px' },
       lg: { min: '992px' },
       md: { min: '768px' },
