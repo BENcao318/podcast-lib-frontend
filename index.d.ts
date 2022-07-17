@@ -1,0 +1,10 @@
+declare module '*.png'
+declare module '*.jpg'
+declare module '*.svg'
+declare module '*.gif'
+
+declare module '../helpers'
+declare module './Episode'
+declare module './subscription'
+declare module './user'
+declare module './episodePlayer'
