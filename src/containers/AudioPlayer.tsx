@@ -37,7 +37,7 @@ const AudioPlayer: React.FC<Props> = ({
 
   const [forwardEffect, setForwardEffect] = useState(false) // For fastforward animation
   const [backwardEffect, setBackwardEffect] = useState(false) // For backward animation
-  const [volume, setVolume] = useState(0.88)
+  const [volume, setVolume] = useState(0.6)
   const [audioProgress, setAudioProgress] = useState(0)
 
   const dispatch = useAppDispatch()

@@ -15,7 +15,7 @@ import { ReactComponent as UserLogo } from '../assets/user.svg'
 import GenresPopover from '../components/GenresPopover'
 import SignOutPopover from '../components/SignOutPopover'
 
-import {ReduxStateInterface} from '../utils/interfaces'
+import { ReduxStateInterface } from '../utils/interfaces'
 
 interface Props {
   showSidebar: boolean
@@ -99,7 +99,7 @@ const SideBar: React.FC<Props> = ({ showSidebar, setShowModal }) => {
       </ul>
       <hr className="mt-6 mb-6 border-b-0 border-gray-400" />
 
-      <div className="absolute flex flex-col w-full bottom-36">
+      <div className="absolute flex flex-col w-full bottom-60">
         <hr className="mb-2 border-b-0 border-gray-400" />
         {userStatus.logged_in ? (
           <div className="relative flex items-center justify-start h-16 min-w-full py-3">
