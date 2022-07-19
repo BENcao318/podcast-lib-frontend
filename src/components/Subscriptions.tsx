@@ -1,7 +1,7 @@
 import React from 'react'
 import Subscription from './Subscription'
 
-import {SubscriptionInterface} from '../utils/interfaces'
+import { SubscriptionInterface } from '../utils/interfaces'
 
 interface Props {
   subscriptions: SubscriptionInterface[]
@@ -10,11 +10,13 @@ interface Props {
 const Subscriptions: React.FC<Props> = ({ subscriptions }) => {
   return (
     <div className="flex flex-wrap justify-center">
-      {subscriptions.map((subscription: any) => (
-        <div key={subscription.track_id}>
-          <Subscription subscription={subscription} />
-        </div>
-      ))}
+      {subscriptions &&
+        subscriptions.map((subscription: SubscriptionInterface) => (
+          <Subscription
+            subscription={subscription}
+            key={subscription.track_id}
+          />
+        ))}
     </div>
   )
 }

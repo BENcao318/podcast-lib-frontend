@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 
-import {SubscriptionInterface} from '../utils/interfaces'
+import { SubscriptionInterface } from '../utils/interfaces'
 
 interface Props {
   subscription: SubscriptionInterface
@@ -16,7 +16,7 @@ const Subscription: React.FC<Props> = ({ subscription }) => {
 
   return (
     <div
-      className="max-w-xs mx-3 mb-4 overflow-hidden shadow-2xl cursor-pointer rounded-xl bg-neutral-100 hover:border-2 border-sky-600"
+      className="w-1/4 mx-3 mb-4 overflow-hidden shadow-2xl cursor-pointer min-w-60 lg:w-1/6 rounded-xl bg-neutral-100 hover:border-2 border-sky-600"
       onClick={handleClick}
     >
       <img
