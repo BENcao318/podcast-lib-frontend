@@ -36,7 +36,7 @@ const SignUpSection: React.FC = () => {
   )
 
   return (
-    <section className="absolute w-full h-full">
+    <section className="relative w-3/4 h-full mx-auto xxl:w-1/2">
       <SignUpForm handleSubmit={handleSubmit} />
     </section>
   )

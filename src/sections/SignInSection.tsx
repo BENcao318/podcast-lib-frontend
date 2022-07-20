@@ -45,7 +45,7 @@ const SignInSection: React.FC = () => {
   )
 
   return (
-    <section className="absolute w-full h-full">
+    <section className="w-3/4 h-full mx-auto relatve xxl:1/2">
       <SignInForm handleSubmit={handleSubmit} signInErrors={signInErrors} />
     </section>
   )
