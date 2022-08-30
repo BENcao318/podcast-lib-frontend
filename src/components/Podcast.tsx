@@ -16,7 +16,7 @@ const Podcast: React.FC<Props> = ({ podcast }) => {
 
   return (
     <div
-      className="w-1/4 mx-3 mb-4 overflow-hidden shadow-2xl cursor-pointer min-w-60 lg:w-1/6 rounded-xl bg-neutral-100 hover:border-2 border-sky-600"
+      className="w-1/4 max-w-xl mx-3 mb-4 overflow-hidden shadow-2xl cursor-pointer min-w-60 lg:w-1/6 rounded-xl bg-neutral-100 hover:border-2 border-sky-600"
       onClick={handleClick}
     >
       <img
