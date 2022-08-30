@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin, userLogout } from './redux/user'
 import { ReactComponent as SidebarsLogo } from './assets/list-sidebar.svg'
-import { ReactComponent as FoldMenuLogo } from './assets/x.svg'
+import { ReactComponent as FoldMenuLogo } from './assets/leftgo-arrow.svg'
 
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -17,14 +17,16 @@ import SearchBar from './containers/SearchBar'
 import AskToSignInModal from './components/AskToSignInModal'
 import usePlayerApplications from './hooks/usePlayerApplications'
 
-import {ReduxStateInterface} from './utils/interfaces'
-import {SearchResultInterface} from './utils/interfaces'
+import { ReduxStateInterface } from './utils/interfaces'
+import { SearchResultInterface } from './utils/interfaces'
 // import axios from 'axios'
 // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL ? process.env.REACT_APP_SERVER_URL : 'http://localhost:3001'
 
 const App = () => {
   const { audioRef, handlePlay, handlePause } = usePlayerApplications()
-  const episodePlayer = useSelector((state: ReduxStateInterface) => state.episodePlayer)
+  const episodePlayer = useSelector(
+    (state: ReduxStateInterface) => state.episodePlayer
+  )
   const [searchResult, setSearchResult] = useState<SearchResultInterface>({
     podcasts: [],
     episodes: [],
@@ -59,13 +61,13 @@ const App = () => {
       <BrowserRouter>
         <div className="sticky flex invisible px-4 py-2 bg-white w-72 top-2 xxl:h-0 z-60">
           <SidebarsLogo
-            className={`w-8 h-8 ml-4 fill-neutral-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+            className={`w-6 h-6 fill-neutral-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
               showSidebar ? 'invisible w-0 h-0' : 'visible'
             }`}
             onClick={() => setShowSidebar(!showSidebar)}
           />
           <FoldMenuLogo
-            className={`w-8 h-8 fill-neutrual-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+            className={`w-6 h-6 absolute fill-neutrual-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
               showSidebar ? 'visible' : 'invisible'
             }`}
             onClick={() => setShowSidebar(!showSidebar)}
