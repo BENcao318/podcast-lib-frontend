@@ -13,7 +13,7 @@ import EpisodeWithPodcastInfo from '../components/EpisodeWithPodcastInfo'
 // global state with redux etc
 // server state/cache ... swr, react-query etc
 
-import {PodcastDetailsInterface} from '../utils/interfaces'
+import { PodcastDetailsInterface } from '../utils/interfaces'
 
 interface Props {
   handlePlay: () => void
@@ -21,18 +21,24 @@ interface Props {
   searchResult: any
 }
 
-const SearchSection: React.FC<Props> = ({ handlePlay, handlePause, searchResult }) => {
-  const [podcastDetails, setPodcastDetails] = useState<PodcastDetailsInterface>({
-    releaseDate: '',
-    collectionName: '',
-    description: '',
-    artistName: '',
-    artworkUrl600: '',
-    genreIds: [],
-    genres: [],
-    trackId: 0,
-    collectionViewUrl: ''
-  })
+const SearchSection: React.FC<Props> = ({
+  handlePlay,
+  handlePause,
+  searchResult,
+}) => {
+  const [podcastDetails, setPodcastDetails] = useState<PodcastDetailsInterface>(
+    {
+      releaseDate: '',
+      collectionName: '',
+      description: '',
+      artistName: '',
+      artworkUrl600: '',
+      genreIds: [],
+      genres: [],
+      trackId: 0,
+      collectionViewUrl: '',
+    }
+  )
   const [loadingContent, setLoadingContent] = useState(false)
 
   const topEpisodeSearchResults = searchResult.episodes.slice(0, 4)
@@ -55,11 +61,11 @@ const SearchSection: React.FC<Props> = ({ handlePlay, handlePause, searchResult 
   }, [searchResult.podcasts])
 
   return (
-    <div className="grid w-8/12 gap-12 mt-8 place-self-center">
-      <div className="flex gap-12 place-self-center">
+    <div className="grid gap-12 mt-8 xxl:w-8/12 place-self-center">
+      <div className="flex flex-col gap-12 lg:flex-row place-self-center">
         <div>
-          <p className="mb-4 ml-4 text-3xl font-semibold text-left">
-            Top Podcast Result:{' '}
+          <p className="mb-6 ml-4 text-3xl font-semibold text-center text-gray-600">
+            Top Podcast Result:
           </p>
           <div>
             {loadingContent ? (
@@ -74,7 +80,7 @@ const SearchSection: React.FC<Props> = ({ handlePlay, handlePause, searchResult 
           </div>
         </div>
         <div>
-          <p className="mb-4 text-3xl font-semibold text-left">
+          <p className="mb-6 text-3xl font-semibold text-center text-gray-600">
             Top Episode Result:{' '}
           </p>
           {searchResult.episodes.length !== 0 && (
