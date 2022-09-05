@@ -61,13 +61,13 @@ const App = () => {
       <BrowserRouter>
         <div className="sticky flex invisible px-4 py-2 bg-white w-72 top-2 xxl:h-0 z-60">
           <SidebarsLogo
-            className={`w-6 h-6 fill-neutral-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+            className={`w-8 h-8 fill-neutral-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
               showSidebar ? 'invisible w-0 h-0' : 'visible'
             }`}
             onClick={() => setShowSidebar(!showSidebar)}
           />
           <FoldMenuLogo
-            className={`w-6 h-6 absolute fill-neutrual-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
+            className={`w-8 h-8 fill-neutrual-600 hover:fill-neutral-200 xxl:invisible cursor-pointer ${
               showSidebar ? 'visible' : 'invisible'
             }`}
             onClick={() => setShowSidebar(!showSidebar)}
