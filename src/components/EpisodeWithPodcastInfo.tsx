@@ -23,7 +23,7 @@ const EpisodeWithPodcastInfo: React.FC<Props> = ({
         <img
           src={episode.artworkUrl160}
           alt="cover images"
-          className="rounded-lg"
+          className="rounded-xl max-h-36"
           onClick={() => navigate(`/podcasts/${episode.collectionId}`)}
         />
       </div>
